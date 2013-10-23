@@ -4,5 +4,8 @@ class cm::standalone ($appname, $path) {
     path => $path,
     web => true,
   }
-  require 'redis', 'mysql::server', 'memcached'
+  require 'redis'
+  require 'mysql::server'
+  require 'memcached'
+  require 'socket-redis'
 }
