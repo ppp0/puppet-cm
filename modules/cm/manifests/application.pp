@@ -1,4 +1,4 @@
-define cm::application ($path, $vhosts = {}, $crons = undef, $debug = false) {
+define cm::application ($path, $web = false, $vhosts = {}, $crons = undef, $debug = false) {
 
   require 'composer'
   require 'php5'
@@ -8,4 +8,14 @@ define cm::application ($path, $vhosts = {}, $crons = undef, $debug = false) {
   require 'php5::extension::intl'
   require 'php5::extension::memcache'
   require 'uglify'
+
+  if $web {
+    require 'apache2'
+    require 'apache2::mod::rewrite'
+    require 'php5::apache2'
+
+    apache2::vhost {$name:
+      content => template('cm/application/vhost.conf'),
+    }
+  }
 }
