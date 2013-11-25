@@ -7,6 +7,9 @@ define cm::application ($path, $web = false, $vhosts = {}, $crons = undef, $debu
   require 'php5::extension::redis'
   require 'php5::extension::intl'
   require 'php5::extension::memcache'
+  require 'php5::extension::gd'
+  require 'php5::extension::imagick'
+  require 'php5::extension::curl'
   require 'uglify'
 
   if $web {
