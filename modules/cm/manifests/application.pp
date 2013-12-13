@@ -11,7 +11,7 @@ define cm::application ($path, $web = false, $vhosts = {}, $crons = undef, $debu
   require 'php5::extension::imagick'
   require 'php5::extension::curl'
   require 'uglify'
-  require 'foreman-initd'
+  require 'foreman::initd'
 
   if $web {
     require 'apache2'
