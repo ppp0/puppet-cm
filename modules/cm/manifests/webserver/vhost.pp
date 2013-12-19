@@ -50,7 +50,7 @@ define cm::webserver::vhost(
   if ($cdn_origin) {
     nginx::resource::vhost{"${name}-origin":
       listen_port => 80,
-      server_name => [git ],
+      server_name => [$cdn_origin],
       vhost_cfg_prepend => [
        'expires 1y;',
        'gzip on;',
