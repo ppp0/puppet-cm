@@ -3,10 +3,12 @@ define cm::webserver::vhost(
   $ssl_cert,
   $ssl_key,
   $aliases = [],
-  $cdn_origin = undef
+  $cdn_origin = undef,
+  $debug = false
  ) {
 
   $hostnames = concat([$name], $aliases)
+  $debug_int = $debug ? {true => 1, false => 0}
 
   nginx::resource::vhost{"${name}-http":
     listen_port => 80,
@@ -26,6 +28,7 @@ define cm::webserver::vhost(
     location_cfg_append => [
       'include fastcgi_params;',
       "fastcgi_param SCRIPT_FILENAME ${path}/public/index.php;",
+      "fastcgi_param CM_DEBUG ${debug_int};",
       'fastcgi_keep_conn on;',
       "fastcgi_pass fastcgi-backend;",
       'error_page 502 =503 /maintenance;',
@@ -68,6 +71,7 @@ define cm::webserver::vhost(
       location_cfg_append => [
         'include fastcgi_params;',
         "fastcgi_param SCRIPT_FILENAME ${path}/public/index.php;",
+        "fastcgi_param CM_DEBUG ${debug_int};",
         'fastcgi_keep_conn on;',
         "fastcgi_pass fastcgi-backend;",
       ],

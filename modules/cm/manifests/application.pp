@@ -23,6 +23,6 @@ define cm::application (
   if $web {
     require 'cm::webserver'
 
-    create_resources('cm::webserver::vhost', $vhosts, {path => $path})
+    create_resources('cm::webserver::vhost', $vhosts, {path => $path, debug => $debug})
   }
 }
