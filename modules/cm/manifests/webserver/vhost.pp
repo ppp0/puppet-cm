@@ -5,8 +5,18 @@ define cm::webserver::vhost(
   $aliases = [],
  ) {
 
+  $hostnames = concat([$name], $aliases)
+
+  nginx::resource::vhost{"${name}-http":
+    listen_port => 80,
+    server_name => $hostnames,
+    location_cfg_append => [
+      'return 301 https://$host$request_uri;',
+    ],
+  }
+
   nginx::resource::vhost {"${name}-https":
-    server_name => concat([$name], $aliases),
+    server_name => $hostnames,
     ssl => true,
     ssl_port => 443,
     listen_port => 443,
