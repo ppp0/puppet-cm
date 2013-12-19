@@ -1,4 +1,10 @@
-define cm::application ($path, $web = false, $vhosts = {}, $crons = undef, $debug = false) {
+define cm::application (
+  $path,
+  $web = false,
+  $vhosts = {},
+  $crons = undef,
+  $debug = false
+) {
 
   require 'composer'
   require 'php5'
@@ -10,16 +16,13 @@ define cm::application ($path, $web = false, $vhosts = {}, $crons = undef, $debu
   require 'php5::extension::gd'
   require 'php5::extension::imagick'
   require 'php5::extension::curl'
+  require 'php5::fpm'
   require 'uglify'
   require 'foreman::initd'
 
   if $web {
-    require 'apache2'
-    require 'apache2::mod::rewrite'
-    require 'php5::apache2'
+    require 'cm::webserver'
 
-    apache2::vhost {$name:
-      content => template('cm/application/vhost.conf'),
-    }
+    create_resources('cm::webserver::vhost', $vhosts, {path => $path, debug => $debug})
   }
 }
