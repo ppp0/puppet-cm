@@ -24,6 +24,7 @@ define cm::application (
   require 'php5::fpm'
   require 'uglify'
   require 'foreman::initd'
+  require 'mysql::client'
 
   if $web {
     require 'cm::webserver'
