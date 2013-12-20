@@ -16,6 +16,7 @@ define cm::application (
   require 'php5::extension::gd'
   require 'php5::extension::imagick'
   require 'php5::extension::curl'
+  require 'php5::extension::runkit'
   require 'php5::fpm'
   require 'uglify'
   require 'foreman::initd'
