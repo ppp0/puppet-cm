@@ -1,0 +1,4 @@
+name 'cm'
+version '0.1.0'
+
+dependency 'git', '>= 0.0.1'
