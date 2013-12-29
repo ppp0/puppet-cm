@@ -1,4 +1,6 @@
-name 'cm'
+name 'cargomedia-cm'
 version '0.1.0'
+summary 'test'
+description 'test'
 
-dependency 'git', '>= 0.0.1'
+dependency 'cargomedia/git', '>= 0.0.1'
