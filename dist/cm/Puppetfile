@@ -1,0 +1,3 @@
+mod 'git',
+  :git => 'git@github.com:cargomedia/puppet-packages.git',
+  :path => 'modules/git'
