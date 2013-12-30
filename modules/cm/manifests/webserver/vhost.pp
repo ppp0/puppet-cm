@@ -7,6 +7,8 @@ define cm::webserver::vhost(
   $debug = false
  ) {
 
+  include 'cm::webserver'
+
   $hostnames = concat([$name], $aliases)
   $debug_int = $debug ? {true => 1, false => 0}
 
