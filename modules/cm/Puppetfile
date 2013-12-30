@@ -1,3 +1,7 @@
+mod 'stdlib',
+  :git => 'git://github.com/puppetlabs/puppetlabs-stdlib.git',
+  :ref => '4.1.0'
+  
 mod 'composer',
   :git => 'git@github.com:njam/puppet-packages.git',
   :ref => 'deps',
