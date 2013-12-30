@@ -1,44 +1,44 @@
 mod 'composer',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/composer'
 
 mod 'php5',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/php5'
 
 mod 'uglify',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/uglify'
 
 mod 'foreman',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/foreman'
 
 mod 'mysql',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/mysql'
 
 mod 'redis',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/redis'
 
 mod 'memcached',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/memcached'
 
 mod 'socket-redis',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/socket-redis'
 
 mod 'nginx',
   :git => 'git@github.com:njam/puppet-packages.git',
-  :spec => 'deps',
+  :ref => 'deps',
   :path => 'modules/nginx'
