@@ -33,4 +33,3 @@ mod 'socket-redis',
 mod 'nginx',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/nginx'
-
