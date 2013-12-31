@@ -2,7 +2,6 @@ define cm::application (
   $path,
   $web = false,
   $vhosts = {},
-  $crons = undef,
   $debug = false
 ) {
 
