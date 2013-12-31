@@ -1,7 +1,7 @@
 define cm::webserver::vhost(
   $path,
-  $ssl_cert,
-  $ssl_key,
+  $ssl_cert = undef,
+  $ssl_key = undef,
   $aliases = [],
   $cdn_origin = undef,
   $debug = false
@@ -9,20 +9,22 @@ define cm::webserver::vhost(
 
   $hostnames = concat([$name], $aliases)
   $debug_int = $debug ? {true => 1, false => 0}
+  $ssl = ($ssl_cert != undef) or ($ssl_key != undef)
 
-  nginx::resource::vhost{"${name}-http":
-    listen_port => 80,
-    server_name => $hostnames,
-    location_cfg_append => [
-      'return 301 https://$host$request_uri;',
-    ],
+  if ($ssl) {
+    nginx::resource::vhost{"${name}-https-redirect":
+      listen_port => 80,
+      server_name => $hostnames,
+      location_cfg_append => [
+        'return 301 https://$host$request_uri;',
+      ],
+    }
   }
 
-  nginx::resource::vhost {"${name}-https":
+  nginx::resource::vhost {$name:
     server_name => $hostnames,
-    ssl => true,
-    ssl_port => 443,
-    listen_port => 443,
+    ssl => $ssl,
+    listen_port => $ssl ? {true => 443, false => 80},
     ssl_cert => $ssl_cert,
     ssl_key => $ssl_key,
     location_cfg_append => [
@@ -36,7 +38,7 @@ define cm::webserver::vhost(
   }
 
   nginx::resource::location{"${name}-fpm-status":
-    vhost => "${name}-https",
+    vhost => $name,
     location => '/fpm-status',
     location_cfg_append => [
       'deny all;',
@@ -44,7 +46,7 @@ define cm::webserver::vhost(
   }
 
   nginx::resource::location{"${name}-maintenance":
-    vhost => "${name}-https",
+    vhost => $name,
     location => '/maintenance',
     www_root => "${path}/public",
     try_files => ['/maintenance.html', 'something-nonexistent'],
