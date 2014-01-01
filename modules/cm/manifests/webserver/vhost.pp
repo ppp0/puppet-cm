@@ -50,6 +50,20 @@ define cm::webserver::vhost(
     try_files => ['/maintenance.html', 'something-nonexistent'],
   }
 
+  if ($debug) {
+    nginx::resource::location{"${name}-library":
+      vhost => $name,
+      location => '/library',
+      www_root => "${path}/library",
+    }
+
+    nginx::resource::location{"${name}-vendor":
+      vhost => $name,
+      location => '/vendor',
+      www_root => "${path}/vendor",
+    }
+  }
+
   if ($cdn_origin) {
     nginx::resource::vhost{"${name}-origin":
       listen_port => 80,
