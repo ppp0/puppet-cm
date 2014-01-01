@@ -57,14 +57,14 @@ define cm::webserver::vhost(
   if ($debug) {
     nginx::resource::location{"${name}-library":
       vhost => $name,
-      location => '/library',
-      www_root => "${path}/library",
+      location => '/library/',
+      www_root => $path,
     }
 
     nginx::resource::location{"${name}-vendor":
       vhost => $name,
-      location => '/vendor',
-      www_root => "${path}/vendor",
+      location => '/vendor/',
+      www_root => $path,
     }
   }
 
