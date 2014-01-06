@@ -46,3 +46,8 @@ mod 'nginx',
   :git => 'git@github.com:njam/puppet-packages.git',
   :ref => 'deps',
   :path => 'modules/nginx'
+
+mod 'bipbip',
+    :git => 'git@github.com:njam/puppet-packages.git',
+    :ref => 'deps',
+    :path => 'modules/bipbip'
