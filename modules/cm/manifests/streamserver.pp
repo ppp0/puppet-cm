@@ -1,5 +1,5 @@
 class cm::stream(
-  $hostname,
+  $hostname = "stream.${domain}",
   $ssl_cert = undef,
   $ssl_key = undef
 ) {
