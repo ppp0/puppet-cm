@@ -1,16 +1,18 @@
 class cm::stream(
-  $hostname = "stream.${domain}",
   $ssl_cert = undef,
-  $ssl_key = undef
+  $ssl_key = undef,
+  $stream_members = ['localhost:8091', 'localhost:8092', 'localhost:8093', 'localhost:8094']
 ) {
 
   class {'nginx': }
 
-  nginx::resource::vhost {$hostname:
+  $ssl = ($ssl_cert != undef) or ($ssl_key != undef)
+
+  nginx::resource::vhost {$name:
     ensure            => present,
     listen_port       => '8090',
     proxy             => 'http://backend-socketredis',
-    ssl               => true,
+    ssl               => $ssl,
     ssl_port          => '8090',
     ssl_cert          => $ssl_cert,
     ssl_key           => $ssl_key,
@@ -27,12 +29,7 @@ class cm::stream(
 
   nginx::resource::upstream {'backend-socketredis':
     ensure  => present,
-    members => [
-      'localhost:8091',
-      'localhost:8092',
-      'localhost:8093',
-      'localhost:8094',
-    ],
+    members => $stream_members,
     upstream_cfg_append => [
       'ip_hash;',
     ],

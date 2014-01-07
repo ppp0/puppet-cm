@@ -1,8 +1,9 @@
-class cm::services($redisHost) {
+class cm::services($redisHost = '10.10.10.100') {
 
   include 'redis'
   include 'mysql::server'
   include 'memcached'
+  include 'cm::stream'
 
   class {'socket-redis':
     redisHost => $redisHost,
