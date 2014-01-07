@@ -28,4 +28,11 @@ class cm::webserver(
       'keepalive 400;',
     ],
   }
+
+  @bipbip::entry {'nginx':
+    plugin => 'nginx',
+    options => {
+      'url' => 'http://localhost:80/server-status',
+    }
+  }
 }
