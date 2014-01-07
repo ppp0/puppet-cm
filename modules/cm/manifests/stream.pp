@@ -1,14 +1,15 @@
 class cm::stream(
+  $redisHost = '127.0.0.1',
   $ssl_cert = undef,
   $ssl_key = undef,
   $stream_members = ['localhost:8091', 'localhost:8092', 'localhost:8093', 'localhost:8094']
 ) {
 
-  class {'nginx': }
+  include 'nginx'
 
   $ssl = ($ssl_cert != undef) or ($ssl_key != undef)
 
-  nginx::resource::vhost {$name:
+  nginx::resource::vhost {'stream-server':
     ensure            => present,
     listen_port       => '8090',
     proxy             => 'http://backend-socketredis',
@@ -33,5 +34,10 @@ class cm::stream(
     upstream_cfg_append => [
       'ip_hash;',
     ],
+  }
+
+  class {'socket-redis':
+    redisHost => $redisHost,
+    socketPorts => [8091, 8092, 8093, 8094],
   }
 }
