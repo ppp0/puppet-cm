@@ -2,7 +2,8 @@ define cm::application (
   $path,
   $web = false,
   $vhosts = {},
-  $debug = false
+  $debug = false,
+  $development = false,
 ) {
 
   require 'composer'
@@ -24,6 +25,10 @@ define cm::application (
   require 'uglify'
   require 'foreman::initd'
   require 'mysql::client'
+
+  if $development {
+    require 'phpunit'
+  }
 
   if $web {
     require 'cm::webserver'
