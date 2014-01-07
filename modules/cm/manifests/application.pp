@@ -21,13 +21,14 @@ define cm::application (
   require 'php5::extension::svm'
   require 'php5::extension::mcrypt'
   require 'php5::extension::gearman'
-  if $development {
-    require 'phpunit'
-  }
   require 'php5::fpm'
   require 'uglify'
   require 'foreman::initd'
   require 'mysql::client'
+
+  if $development {
+    require 'phpunit'
+  }
 
   if $web {
     require 'cm::webserver'
