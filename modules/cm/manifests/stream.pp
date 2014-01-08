@@ -1,8 +1,9 @@
 class cm::stream(
-  $redisHost = '127.0.0.1',
+  $port = 8090,
   $ssl_cert = undef,
   $ssl_key = undef,
-  $stream_members = ['localhost:8091', 'localhost:8092', 'localhost:8093', 'localhost:8094']
+  $redis_host = '127.0.0.1',
+  $socket_ports = [8091, 8092, 8093, 8094]
 ) {
 
   include 'nginx'
@@ -10,13 +11,12 @@ class cm::stream(
   $ssl = ($ssl_cert != undef) or ($ssl_key != undef)
 
   nginx::resource::vhost {'stream-server':
-    ensure            => present,
-    listen_port       => '8090',
-    proxy             => 'http://backend-socketredis',
+    listen_port       => $port,
     ssl               => $ssl,
-    ssl_port          => '8090',
+    ssl_port          => $port,
     ssl_cert          => $ssl_cert,
     ssl_key           => $ssl_key,
+    proxy             => 'http://backend-socketredis',
     location_cfg_append => [
       'proxy_set_header X-Real-IP $remote_addr;',
       'proxy_set_header Host $host;',
@@ -28,6 +28,8 @@ class cm::stream(
     ],
   }
 
+  $stream_members = prefix($socket_ports, 'localhost:')
+
   nginx::resource::upstream {'backend-socketredis':
     ensure  => present,
     members => $stream_members,
@@ -37,7 +39,7 @@ class cm::stream(
   }
 
   class {'socket-redis':
-    redisHost => $redisHost,
-    socketPorts => [8091, 8092, 8093, 8094],
+    redisHost => $redis_host,
+    socketPorts => $socket_ports,
   }
 }
