@@ -3,7 +3,8 @@ class cm::stream(
   $ssl_cert = undef,
   $ssl_key = undef,
   $redis_host = '127.0.0.1',
-  $socket_ports = [8091, 8092, 8093, 8094]
+  $socket_ports = [8091, 8092, 8093, 8094],
+  $status_port = 8085
 ) {
 
   include 'nginx'
@@ -41,5 +42,6 @@ class cm::stream(
   class {'socket-redis':
     redisHost => $redis_host,
     socketPorts => $socket_ports,
+    statusPort => $status_port,
   }
 }
