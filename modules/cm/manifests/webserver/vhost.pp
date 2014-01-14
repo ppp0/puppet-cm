@@ -29,11 +29,6 @@ define cm::webserver::vhost(
     listen_port => $ssl ? {true => 443, false => 80},
     ssl_cert => $ssl_cert,
     ssl_key => $ssl_key,
-    vhost_cfg_prepend => [
-      'gzip on;',
-      'gzip_min_length 1000;',
-      'gzip_types application/x-javascript text/css text/plain application/xml;',
-    ],
     location_cfg_append => [
       'include fastcgi_params;',
       "fastcgi_param SCRIPT_FILENAME ${path}/public/index.php;",
@@ -80,6 +75,8 @@ define cm::webserver::vhost(
       vhost_cfg_prepend => [
        'expires 1y;',
        'gzip on;',
+       'gzip_proxied any;',
+       'gzip_http_version 1.0;',
        'gzip_min_length 1000;',
        'gzip_types application/x-javascript text/css text/plain application/xml;',
       ],
