@@ -76,6 +76,7 @@ define cm::webserver::vhost(
        'expires 1y;',
        'gzip on;',
        'gzip_proxied any;',
+       'gzip_http_version 1.0;',
        'gzip_min_length 1000;',
        'gzip_types application/x-javascript text/css text/plain application/xml;',
       ],
