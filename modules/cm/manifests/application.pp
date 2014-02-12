@@ -28,6 +28,7 @@ define cm::application (
 
   if $development {
     require 'phpunit'
+    require 'php5::extension::xdebug'
   }
 
   if $web {
