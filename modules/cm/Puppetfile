@@ -34,6 +34,10 @@ mod 'memcached',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/memcached'
 
+mod 'elasticsearch',
+  :git => 'git@github.com:cargomedia/puppet-packages.git',
+  :path => 'modules/elasticsearch'
+
 mod 'socket-redis',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/socket-redis'
