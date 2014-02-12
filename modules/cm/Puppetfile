@@ -10,6 +10,10 @@ mod 'php5',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/php5'
 
+mod 'phpunit',
+  :git => 'git@github.com:cargomedia/puppet-packages.git',
+  :path => 'modules/phpunit'
+
 mod 'uglify',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/uglify'
