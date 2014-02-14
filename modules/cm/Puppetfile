@@ -38,6 +38,10 @@ mod 'elasticsearch',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/elasticsearch'
 
+mod 'gearmand',
+  :git => 'git@github.com:cargomedia/puppet-packages.git',
+  :path => 'modules/gearmand'
+
 mod 'socket-redis',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/socket-redis'
@@ -49,3 +53,7 @@ mod 'nginx',
 mod 'bipbip',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/bipbip'
+
+mod 'wowza',
+  :git => 'git@github.com:cargomedia/puppet-packages.git',
+  :path => 'modules/wowza'
