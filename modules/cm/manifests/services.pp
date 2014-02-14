@@ -4,5 +4,6 @@ class cm::services {
   include 'mysql::server'
   include 'memcached'
   include 'elasticsearch'
+  include 'gearmand::server'
   include 'cm::stream'
 }
