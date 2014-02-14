@@ -53,3 +53,7 @@ mod 'nginx',
 mod 'bipbip',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/bipbip'
+
+mod 'wowza',
+  :git => 'git@github.com:cargomedia/puppet-packages.git',
+  :path => 'modules/wowza'
