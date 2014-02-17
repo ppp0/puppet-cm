@@ -31,7 +31,8 @@ define cm::application (
     require 'php5::extension::xdebug'
   }
 
-  if $path and $web {
+  if $web {
+    if !$path { fail('Cannot define cm::webserver::vhost without application-path') }
     require 'cm::webserver'
 
     create_resources('cm::webserver::vhost', $vhosts, {path => $path, debug => $debug})
