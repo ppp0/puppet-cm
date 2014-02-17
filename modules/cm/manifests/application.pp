@@ -1,5 +1,5 @@
 define cm::application (
-  $path,
+  $path = undef,
   $web = false,
   $vhosts = {},
   $debug = false,
@@ -32,6 +32,7 @@ define cm::application (
   }
 
   if $web {
+    if !$path { fail('Cannot define cm::webserver::vhost without application-path') }
     require 'cm::webserver'
 
     create_resources('cm::webserver::vhost', $vhosts, {path => $path, debug => $debug})
