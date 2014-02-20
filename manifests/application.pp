@@ -1,8 +1,4 @@
 define cm::application (
-  $path = undef,
-  $web = false,
-  $vhosts = {},
-  $debug = false,
   $development = false,
 ) {
 
@@ -29,12 +25,5 @@ define cm::application (
   if $development {
     require 'phpunit'
     require 'php5::extension::xdebug'
-  }
-
-  if $web {
-    if !$path { fail('Cannot define cm::webserver::vhost without application-path') }
-    require 'cm::webserver'
-
-    create_resources('cm::webserver::vhost', $vhosts, {path => $path, debug => $debug})
   }
 }

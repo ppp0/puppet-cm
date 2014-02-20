@@ -1,4 +1,4 @@
-class cm::stream(
+class cm::services::stream(
   $port = 8090,
   $ssl_cert = undef,
   $ssl_key = undef,

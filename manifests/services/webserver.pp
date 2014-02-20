@@ -1,4 +1,4 @@
-class cm::webserver(
+class cm::services::webserver(
   $fastcgi_members = ['localhost:9000']
 ) {
 
