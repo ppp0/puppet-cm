@@ -1,5 +1,5 @@
-define cm::application (
-  $development = false,
+class cm::application (
+  $development = false
 ) {
 
   require 'composer'
