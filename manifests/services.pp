@@ -6,4 +6,5 @@ class cm::services {
   include 'elasticsearch'
   include 'gearmand::server'
   include 'cm::services::stream'
+  include 'cm::services::webserver'
 }
