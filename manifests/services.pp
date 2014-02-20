@@ -5,5 +5,5 @@ class cm::services {
   include 'memcached'
   include 'elasticsearch'
   include 'gearmand::server'
-  include 'cm::stream'
+  include 'cm::services::stream'
 }

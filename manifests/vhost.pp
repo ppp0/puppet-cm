@@ -1,4 +1,4 @@
-define cm::webserver::vhost(
+define cm::vhost(
   $path,
   $ssl_cert = undef,
   $ssl_key = undef,
@@ -7,7 +7,7 @@ define cm::webserver::vhost(
   $debug = false
  ) {
 
-  include 'cm::webserver'
+  include 'cm::services::webserver'
 
   $hostnames = concat([$name], $aliases)
   $debug_int = $debug ? {true => 1, false => 0}
