@@ -29,6 +29,7 @@ define cm::vhost(
     listen_port => $ssl ? {true => 443, false => 80},
     ssl_cert => $ssl_cert,
     ssl_key => $ssl_key,
+    ssl_session_cache => 'shared:SSL:10m',
     location_cfg_append => [
       'include fastcgi_params;',
       "fastcgi_param SCRIPT_FILENAME ${path}/public/index.php;",
