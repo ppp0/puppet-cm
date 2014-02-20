@@ -1,5 +1,5 @@
 class cm::services::wowza(
-  $path,
+  $path_userfiles,
   $rpc_url,
   $license = undef
  ) {
@@ -10,7 +10,7 @@ class cm::services::wowza(
 
   class {'::wowza::app::cm':
     rpc_url => $rpc_url,
-    archive_dir => "${path}/shared/userfiles/streamChannels",
+    archive_dir => "${path_userfiles}/streamChannels",
   }
 
 }
