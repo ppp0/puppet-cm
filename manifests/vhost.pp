@@ -12,7 +12,6 @@ define cm::vhost(
   $hostnames = concat([$name], $aliases)
   $debug_int = $debug ? {true => 1, false => 0}
   $ssl = ($ssl_cert != undef) or ($ssl_key != undef)
-  $ssl_only = ($ssl == true) and ($ssl_port == $listen_port)
 
   if ($ssl) {
     nginx::resource::vhost{"${name}-https-redirect":
