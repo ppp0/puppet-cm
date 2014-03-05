@@ -70,8 +70,10 @@ define cm::vhost(
 
   if ($cdn_origin) {
     nginx::resource::vhost{"${name}-origin":
-      listen_port => 80,
       server_name => [$cdn_origin],
+      ssl => $ssl,
+      ssl_cert => $ssl_cert,
+      ssl_key => $ssl_key,
       vhost_cfg_prepend => [
        'expires 1y;',
        'gzip on;',
