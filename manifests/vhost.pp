@@ -12,6 +12,7 @@ define cm::vhost(
   $hostnames = concat([$name], $aliases)
   $debug_int = $debug ? {true => 1, false => 0}
   $ssl = ($ssl_cert != undef) or ($ssl_key != undef)
+  $ssl_only = ($ssl == true) and ($ssl_port == $listen_port)
 
   if ($ssl) {
     nginx::resource::vhost{"${name}-https-redirect":
@@ -41,6 +42,8 @@ define cm::vhost(
 
   nginx::resource::location{"${name}-fpm-status":
     vhost => $name,
+    ssl => $ssl,
+    ssl_only => $ssl,
     location => '/fpm-status',
     location_cfg_append => [
       'deny all;',
@@ -49,6 +52,8 @@ define cm::vhost(
 
   nginx::resource::location{"${name}-maintenance":
     vhost => $name,
+    ssl => $ssl,
+    ssl_only => $ssl,
     location => '/maintenance',
     www_root => "${path}/public",
     try_files => ['/maintenance.html', 'something-nonexistent'],
@@ -57,12 +62,16 @@ define cm::vhost(
   if ($debug) {
     nginx::resource::location{"${name}-library":
       vhost => $name,
+      ssl => $ssl,
+      ssl_only => $ssl,
       location => '/library/',
       www_root => $path,
     }
 
     nginx::resource::location{"${name}-vendor":
       vhost => $name,
+      ssl => $ssl,
+      ssl_only => $ssl,
       location => '/vendor/',
       www_root => $path,
     }
@@ -90,6 +99,8 @@ define cm::vhost(
     nginx::resource::location{"${name}-origin-upstream":
       location => '~* ^/(vendor-css|vendor-js|library-css|library-js|layout)/',
       vhost => "${name}-origin",
+      ssl => $ssl,
+      ssl_only => false,
       location_cfg_append => [
         'include fastcgi_params;',
         "fastcgi_param SCRIPT_FILENAME ${path}/public/index.php;",
@@ -102,6 +113,8 @@ define cm::vhost(
     nginx::resource::location{"${name}-origin-static":
       location => '/static',
       vhost => "${name}-origin",
+      ssl => $ssl,
+      ssl_only => false,
       www_root => "${path}/public",
       location_cfg_append => [
         'add_header	Access-Control-Allow-Origin	*;',
@@ -110,8 +123,10 @@ define cm::vhost(
 
     nginx::resource::location{"${name}-origin-userfiles":
       location => '/userfiles',
-      www_root => "${path}/public",
       vhost => "${name}-origin",
+      ssl => $ssl,
+      ssl_only => false,
+      www_root => "${path}/public",
     }
   }
 }
