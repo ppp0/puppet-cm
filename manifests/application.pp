@@ -25,5 +25,7 @@ class cm::application (
   if $development {
     require 'phpunit'
     require 'php5::extension::xdebug'
+  } else {
+    require 'php5::extension::opcache'
   }
 }
