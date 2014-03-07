@@ -4,7 +4,7 @@ class cm::application (
 
   require 'composer'
   require 'php5'
-  require 'php5::extension::apc'
+  require 'php5::extension::apcu'
   require 'php5::extension::mysql'
   require 'php5::extension::redis'
   require 'php5::extension::intl'
