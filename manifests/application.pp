@@ -22,10 +22,12 @@ class cm::application (
   require 'foreman::initd'
   require 'mysql::client'
 
+  class {'php5::extension::opcache':
+    enable => !$development,
+  }
+
   if $development {
     require 'phpunit'
     require 'php5::extension::xdebug'
-  } else {
-    require 'php5::extension::opcache'
   }
 }
