@@ -1,59 +1,59 @@
-mod 'stdlib',
+mod 'cargomedia/stdlib',
   :git => 'git://github.com/puppetlabs/puppetlabs-stdlib.git',
   :ref => '4.1.0'
   
-mod 'composer',
+mod 'cargomedia/composer',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/composer'
 
-mod 'php5',
+mod 'cargomedia/php5',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/php5'
 
-mod 'phpunit',
+mod 'cargomedia/phpunit',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/phpunit'
 
-mod 'uglify',
+mod 'cargomedia/uglify',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/uglify'
 
-mod 'foreman',
+mod 'cargomedia/foreman',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/foreman'
 
-mod 'mysql',
+mod 'cargomedia/mysql',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/mysql'
 
-mod 'redis',
+mod 'cargomedia/redis',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/redis'
 
-mod 'memcached',
+mod 'cargomedia/memcached',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/memcached'
 
-mod 'elasticsearch',
+mod 'cargomedia/elasticsearch',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/elasticsearch'
 
-mod 'gearmand',
+mod 'cargomedia/gearmand',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/gearmand'
 
-mod 'socket-redis',
+mod 'cargomedia/socket-redis',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/socket-redis'
 
-mod 'nginx',
+mod 'cargomedia/nginx',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/nginx'
 
-mod 'bipbip',
+mod 'cargomedia/bipbip',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/bipbip'
 
-mod 'wowza',
+mod 'cargomedia/wowza',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/wowza'
