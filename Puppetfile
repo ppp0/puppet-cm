@@ -57,3 +57,7 @@ mod 'cargomedia/bipbip',
 mod 'cargomedia/wowza',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/wowza'
+
+mod 'cargomedia/mongodb',
+  :git => 'git@github.com:cargomedia/puppet-packages.git',
+  :path => 'modules/mongodb'

@@ -7,4 +7,5 @@ class cm::services {
   include 'gearmand::server'
   include 'cm::services::stream'
   include 'cm::services::webserver'
+  include 'mongodb::role::standalone'
 }
