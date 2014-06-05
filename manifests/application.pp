@@ -20,7 +20,7 @@ class cm::application (
   require 'php5::extension::mongo'
   require 'php5::fpm'
   require 'uglify'
-  require 'foreman::initd'
+  require 'foreman::debian'
   require 'mysql::client'
 
   class {'php5::extension::opcache':
