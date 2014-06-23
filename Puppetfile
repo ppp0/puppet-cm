@@ -38,9 +38,9 @@ mod 'cargomedia/elasticsearch',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/elasticsearch'
 
-mod 'cargomedia/gearmand',
+mod 'cargomedia/gearman',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
-  :path => 'modules/gearmand'
+  :path => 'modules/gearman'
 
 mod 'cargomedia/socket-redis',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
