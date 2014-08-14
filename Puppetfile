@@ -46,9 +46,9 @@ mod 'cargomedia/gearman',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
   :path => 'modules/gearman'
 
-mod 'cargomedia/socket-redis',
+mod 'cargomedia/socket_redis',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
-  :path => 'modules/socket-redis'
+  :path => 'modules/socket_redis'
 
 mod 'cargomedia/nginx',
   :git => 'git@github.com:cargomedia/puppet-packages.git',
