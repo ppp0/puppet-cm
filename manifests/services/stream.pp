@@ -40,7 +40,7 @@ class cm::services::stream(
     ],
   }
 
-  class {'socket_redis':
+  class {'socket-redis':
     redisHost => $redis_host,
     socketPorts => $socket_ports,
     statusPort => $status_port,
