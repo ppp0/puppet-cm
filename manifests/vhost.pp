@@ -82,7 +82,7 @@ define cm::vhost(
     } else {
       $cdn_origin_vhost = "${name}-origin"
 
-      nginx::resource::vhost{"${name}-origin":
+      nginx::resource::vhost{$cdn_origin_vhost:
         server_name => [$cdn_origin],
         ssl => $ssl,
         ssl_cert => $ssl_cert,
