@@ -77,30 +77,35 @@ define cm::vhost(
   }
 
   if ($cdn_origin) {
-    nginx::resource::vhost{"${name}-origin":
-      server_name => [$cdn_origin],
-      ssl => $ssl,
-      ssl_cert => $ssl_cert,
-      ssl_key => $ssl_key,
-      vhost_cfg_prepend => [
-       'expires 1y;',
-       'gzip on;',
-       'gzip_proxied any;',
-       'gzip_http_version 1.0;',
-       'gzip_min_length 1000;',
-       'gzip_types application/x-javascript text/css text/plain application/xml image/svg+xml;',
-      ],
-      location_cfg_append => [
-        'deny all;',
-      ],
+    if ($cdn_origin == $name) {
+      $cdn_origin_vhost = $name
+    } else {
+      $cdn_origin_vhost = "${name}-origin"
+
+      nginx::resource::vhost{"${name}-origin":
+        server_name => [$cdn_origin],
+        ssl => $ssl,
+        ssl_cert => $ssl_cert,
+        ssl_key => $ssl_key,
+        location_cfg_append => [
+          'deny all;',
+        ],
+      }
     }
 
     nginx::resource::location{"${name}-origin-upstream":
       location => '~* ^/(vendor-css|vendor-js|library-css|library-js|layout)/',
-      vhost => "${name}-origin",
+      vhost => $cdn_origin_vhost,
       ssl => $ssl,
       ssl_only => false,
       location_cfg_append => [
+        'expires 1y;',
+        'gzip on;',
+        'gzip_proxied any;',
+        'gzip_http_version 1.0;',
+        'gzip_min_length 1000;',
+        'gzip_types application/x-javascript text/css text/plain application/xml image/svg+xml;',
+
         'include fastcgi_params;',
         "fastcgi_param SCRIPT_FILENAME ${path}/public/index.php;",
         "fastcgi_param CM_DEBUG ${debug_int};",
@@ -111,21 +116,36 @@ define cm::vhost(
 
     nginx::resource::location{"${name}-origin-static":
       location => '/static',
-      vhost => "${name}-origin",
+      vhost => $cdn_origin_vhost,
       ssl => $ssl,
       ssl_only => false,
       www_root => "${path}/public",
       location_cfg_append => [
+        'expires 1y;',
+        'gzip on;',
+        'gzip_proxied any;',
+        'gzip_http_version 1.0;',
+        'gzip_min_length 1000;',
+        'gzip_types application/x-javascript text/css text/plain application/xml image/svg+xml;',
+
         'add_header	Access-Control-Allow-Origin	*;',
       ],
     }
 
     nginx::resource::location{"${name}-origin-userfiles":
       location => '/userfiles',
-      vhost => "${name}-origin",
+      vhost => $cdn_origin_vhost,
       ssl => $ssl,
       ssl_only => false,
       www_root => "${path}/public",
+      location_cfg_append => [
+        'expires 1y;',
+        'gzip on;',
+        'gzip_proxied any;',
+        'gzip_http_version 1.0;',
+        'gzip_min_length 1000;',
+        'gzip_types application/x-javascript text/css text/plain application/xml image/svg+xml;',
+      ],
     }
   }
 }
