@@ -5,13 +5,14 @@ define cm::vhost(
   $aliases = [],
   $cdn_origin = undef,
   $debug = false
- ) {
+) {
 
   include 'cm::services::webserver'
 
   $hostnames = concat([$name], $aliases)
   $debug_int = $debug ? {true => 1, false => 0}
   $ssl = ($ssl_cert != undef) or ($ssl_key != undef)
+  $port = $ssl ? {true => 443, false => 80}
 
   if ($ssl) {
     nginx::resource::vhost{"${name}-https-redirect":
@@ -26,7 +27,7 @@ define cm::vhost(
   nginx::resource::vhost {$name:
     server_name => $hostnames,
     ssl => $ssl,
-    listen_port => $ssl ? {true => 443, false => 80},
+    listen_port => $port,
     ssl_cert => $ssl_cert,
     ssl_key => $ssl_key,
     location_cfg_append => [
@@ -34,7 +35,7 @@ define cm::vhost(
       "fastcgi_param SCRIPT_FILENAME ${path}/public/index.php;",
       "fastcgi_param CM_DEBUG ${debug_int};",
       'fastcgi_keep_conn on;',
-      "fastcgi_pass fastcgi-backend;",
+      'fastcgi_pass fastcgi-backend;',
       'error_page 502 =503 /maintenance;',
     ],
   }
@@ -109,7 +110,7 @@ define cm::vhost(
       "fastcgi_param SCRIPT_FILENAME ${path}/public/index.php;",
       "fastcgi_param CM_DEBUG ${debug_int};",
       'fastcgi_keep_conn on;',
-      "fastcgi_pass fastcgi-backend;",
+      'fastcgi_pass fastcgi-backend;',
     ],
   }
 

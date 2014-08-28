@@ -2,7 +2,7 @@ class cm::services::wowza(
   $path,
   $rpc_url,
   $license = undef
- ) {
+) {
 
   class {'::wowza':
     license => $license,
